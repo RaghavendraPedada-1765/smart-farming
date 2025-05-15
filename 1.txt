@@ -1,0 +1,86 @@
+mysql> CREATE TABLE employee (
+    ->     E_id INT PRIMARY KEY,
+    ->     E_name VARCHAR(255),
+    ->     Age INT,
+    ->     Salary DECIMAL(10, 2)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+
+
+mysql> INSERT INTO EMPLOYEE VALUES(1,'RAGHAVENDRA', 32, 55000);
+
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(2,'UNNATH', 28, 38000);
+Query OK, 1 row affected (0.02 sec) 
+
+DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE display_employees()
+    -> BEGIN
+    ->     -- Declare variables
+    ->     DECLARE v_E_id INT;
+    ->     DECLARE v_E_name VARCHAR(255);
+    ->     DECLARE v_Age INT;
+    ->     DECLARE v_Salary DECIMAL(10, 2);
+    ->
+    ->     -- Cursor declaration
+    ->     DECLARE done INT DEFAULT FALSE;
+    ->     DECLARE employee_cursor CURSOR FOR
+    ->         SELECT E_id, E_name, Age, Salary FROM Employee;
+    ->     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    ->
+    ->     -- Open and fetch from cursor
+    ->     OPEN employee_cursor;
+    ->
+    ->     read_loop: LOOP
+    ->         FETCH employee_cursor INTO v_E_id, v_E_name, v_Age, v_Salary;
+    ->
+    ->         IF done THEN
+    ->             LEAVE read_loop;
+    ->         END IF;
+    ->
+    ->         -- Output result (to client, not console)
+    ->         SELECT CONCAT('E_id: ', v_E_id, ', E_name: ', v_E_name, ', Age: ', v_Age, ', Salary: ', v_Salary) AS employee_info;
+    ->     END LOOP;
+    ->
+    ->     CLOSE employee_cursor;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> select* from EMPLOYEE;
++------+-------------+------+----------+
+| E_id | E_name      | Age  | Salary   |
++------+-------------+------+----------+
+|    1 | SHAMBHAVI   |   30 | 50000.00 |
+|    2 | RAGHAVENDRA |   32 | 55000.00 |
+|    3 | UNNATH      |   28 | 38000.00 |
++------+-------------+------+----------+
+3 rows in set (0.00 sec)
+
+mysql> CALL display_employees();
++-------------------------------------------------------+
+| employee_info                                         |
++-------------------------------------------------------+
+| E_id: 1, E_name: SHAMBHAVI, Age: 30, Salary: 50000.00 |
++-------------------------------------------------------+
+1 row in set (0.00 sec)
+
++---------------------------------------------------------+
+| employee_info                                           |
++---------------------------------------------------------+
+| E_id: 2, E_name: RAGHAVENDRA, Age: 32, Salary: 55000.00 |
++---------------------------------------------------------+
+1 row in set (0.01 sec)
+
++----------------------------------------------------+
+| employee_info                                      |
++----------------------------------------------------+
+| E_id: 3, E_name: UNNATH, Age: 28, Salary: 38000.00 |
++----------------------------------------------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
