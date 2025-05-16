@@ -22,7 +22,7 @@ A simple and intuitive database management system for farmers, fields, crops, an
    ```bash
    git clone https://github.com/RaghavendraPedada-1765/SmartFarmingDBMS.git
    cd SmartFarmingDBMS
-````
+
 
 2. **Install Python packages** (if not already installed)
 
