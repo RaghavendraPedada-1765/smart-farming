@@ -16,15 +16,11 @@ A simple and intuitive database management system for farmers, fields, crops, an
 - **Backend**: MySQL
 - **Theme**: `clam` for modern GUI style
 
-## 📸 Screenshots
-
-*(Add your own screenshots here if available)*
-
 ## 📦 How to Run
 
 1. **Clone this repository**
    ```bash
-   git clone https://github.com/yourusername/SmartFarmingDBMS.git
+   git clone https://github.com/RaghavendraPedada-1765/SmartFarmingDBMS.git
    cd SmartFarmingDBMS
 ````
 
