@@ -87,6 +87,3 @@ A simple and intuitive database management system for farmers, fields, crops, an
 
 Feel free to fork and contribute! Pull requests are welcome.
 
-## 📜 License
-
-This project is open-source and available under the [MIT License](LICENSE).
